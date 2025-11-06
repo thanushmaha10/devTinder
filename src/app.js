@@ -2,16 +2,20 @@ const express = require("express");
 
 const app = express();
 
-app.use("/admin", (req, res) => {
-  res.send("Hey admin logged in");
+app.get("/user", (req, res) => {
+  res.send({ firstName: "Thanush", lastName: "Maha" });
 });
 
-app.use("/dashboard", (req, res) => {
-  res.send("work in progress");
+app.post("/user", (req, res) => {
+  res.send("post called successfully");
 });
 
-app.use((req, res) => {
-  res.send("Hello world from the server");
+app.delete("/user", (req, res) => {
+  res.send("user deleted suceesfully");
+});
+
+app.use("/test", (req, res) => {
+  res.send("Test Page");
 });
 
 app.listen(7777, () => {
