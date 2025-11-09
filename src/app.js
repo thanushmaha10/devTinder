@@ -1,19 +1,34 @@
 const express = require("express");
-const { userAuth } = require("./middleware/auth.js");
+const connectDb = require("./config/database");
+const User = require("./models/user");
 
 const app = express();
 
-app.use("/user", userAuth);
+app.post("/signup", async (req, res) => {
+  const user = new User({
+    firstName: "Thanush",
+    lastNme: "Maha",
+    email: "thanush@maha.com",
+    password: "thanush@123",
+    age: 23,
+    gender: "M",
+  });
 
-app.get("/user/admin", (req, res, next) => {
-  console.log("first response ");
-  res.send("Hey admin");
+  try {
+    await user.save();
+    res.send("User added successfully");
+  } catch (err) {
+    res.status(400).send("Error saving the data" + err.message);
+  }
 });
 
-app.get("/user/thanush", (req, res) => {
-  res.send("Welcome thanush");
-});
-
-app.listen(7777, () => {
-  console.log("Server started successfully listening on port 7777");
-});
+connectDb()
+  .then(() => {
+    console.log("Database connected successfully");
+    app.listen(7777, () => {
+      console.log("Server started successfully listening on port 7777");
+    });
+  })
+  .catch((err) => {
+    console.error("Database not connected");
+  });
