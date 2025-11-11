@@ -1,23 +1,54 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const connectDb = require("./config/database");
+const validator = require("validator");
 const User = require("./models/user");
+const { validateSignUpData } = require("./utils/validation");
 
 const app = express();
 
 app.use(express.json());
 
 app.post("/signup", async (req, res) => {
-  const user = new User(req.body);
-
   try {
-    if (user?.skills?.length > 10) {
-      throw new Error("skill cannot be more than 10");
-    }
+    const { firstName, lastName, email, password } = req.body;
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = new User({
+      firstName,
+      lastName,
+      email,
+      password: passwordHash,
+    });
+    validateSignUpData(req);
+    // if (skills?.length > 10) {
+    //   throw new Error("skill cannot be more than 10");
+    // }
     await user.save();
-    console.log(req.body);
+    // console.log(req.body);
     res.send("User added successfully");
   } catch (err) {
-    res.status(400).send("Error saving the data" + err.message);
+    res.status(400).send("Error : " + err.message);
+  }
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!validator.isEmail(email)) {
+      throw new Error("Invalid Email address");
+    }
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      throw new Error("Invalid Credentials");
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (isPasswordValid) {
+      res.send("Login successfull Welocome " + user.firstName);
+    } else {
+      throw new Error("Invalid Credentials");
+    }
+  } catch (err) {
+    res.status(400).send("ERROR : " + err.message);
   }
 });
 

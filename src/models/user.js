@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
+      minLength: 3,
       maxLength: 50,
       required: true,
     },
@@ -27,7 +28,6 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      maxLength: 50,
       required: true,
       validate(value) {
         if (!validator.isStrongPassword(value)) {
@@ -60,6 +60,11 @@ const userSchema = new mongoose.Schema(
     },
     skills: {
       type: [String],
+      validate(value) {
+        if (value.length > 10) {
+          throw new Error("skill cannot be more than 10");
+        }
+      },
     },
   },
   { timestamps: true }
