@@ -4,10 +4,13 @@ const connectDb = require("./config/database");
 const validator = require("validator");
 const User = require("./models/user");
 const { validateSignUpData } = require("./utils/validation");
-
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const { userAuth } = require("./middleware/auth");
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
   try {
@@ -41,12 +44,29 @@ app.post("/login", async (req, res) => {
     if (!user) {
       throw new Error("Invalid Credentials");
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await user.validatePassword(password);
     if (isPasswordValid) {
-      res.send("Login successfull Welocome " + user.firstName);
+      const token = await user.getJwt();
+      // console.log(token);
+
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        // cookie will expire after 7 days
+      });
+      res.send("Login successfull Welcome " + user.firstName);
     } else {
       throw new Error("Invalid Credentials");
     }
+  } catch (err) {
+    res.status(400).send("ERROR : " + err.message);
+  }
+});
+
+app.get("/profile", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
+
+    res.send(user);
   } catch (err) {
     res.status(400).send("ERROR : " + err.message);
   }
@@ -56,7 +76,7 @@ app.post("/user", async (req, res) => {
   const userEmail = req.body.email;
   try {
     const user = await User.find({ email: userEmail });
-    console.log(user);
+    // console.log(user);
     if (!user.length) {
       res.status(404).send("user Not found");
     } else {
@@ -96,7 +116,7 @@ app.patch("/user/:userId", async (req, res) => {
       returnDocument: "after",
       runValidators: true,
     });
-    console.log(user);
+    // console.log(user);
     res.send("User Updated Sucessfully");
   } catch (err) {
     res.status(404).send("Something went wrong" + err.message);
