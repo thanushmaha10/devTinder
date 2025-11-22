@@ -11,6 +11,25 @@ const validateSignUpData = (req) => {
   }
 };
 
+const validateUserEditData = (req) => {
+  const allowedEdits = [
+    "firstName",
+    "lastName",
+    "age",
+    "gender",
+    "about",
+    "skills",
+    "photoUrl",
+  ];
+
+  const isAllowedEdit = Object.keys(req.body).every((key) =>
+    allowedEdits.includes(key)
+  );
+
+  return isAllowedEdit;
+};
+
 module.exports = {
   validateSignUpData,
+  validateUserEditData,
 };

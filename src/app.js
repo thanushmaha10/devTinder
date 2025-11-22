@@ -9,7 +9,9 @@ const requestRouter = require("./routes/request");
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/", authRouter, profileRouter, requestRouter);
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestRouter);
 
 connectDb()
   .then(() => {

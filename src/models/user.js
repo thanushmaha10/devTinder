@@ -54,11 +54,17 @@ const userSchema = new mongoose.Schema(
     about: {
       type: String,
       default: "This is a default about",
+      maxLength: 100,
     },
     photoUrl: {
       type: String,
       default:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIwRBD9gNuA2GjcOf6mpL-WuBhJADTWC3QVQ&s",
+      validate(value) {
+        if (!validator.isURL(value)) {
+          throw new Error("Photo must be a valid url");
+        }
+      },
     },
     skills: {
       type: [String],
