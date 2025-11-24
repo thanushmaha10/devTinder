@@ -29,7 +29,18 @@ const validateUserEditData = (req) => {
   return isAllowedEdit;
 };
 
+const validatePasswordEditData = (req) => {
+  const allowedEdit = ["password"];
+
+  const isAllowedEditPassword = Object.keys(req.body).every((key) =>
+    allowedEdit.includes(key)
+  );
+
+  return isAllowedEditPassword;
+};
+
 module.exports = {
   validateSignUpData,
   validateUserEditData,
+  validatePasswordEditData,
 };
