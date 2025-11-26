@@ -20,7 +20,7 @@ requestRouter.post(
           .json({ message: "Invalid status type" + status });
       }
 
-      const toUser = await User.findById({ toUserId });
+      const toUser = await User.findById({ _id: toUserId });
       if (!toUser) {
         return res.status(404).json({ message: "User Not Found" });
       }
@@ -32,17 +32,17 @@ requestRouter.post(
         ],
       });
 
-      if (!existingConnectionRequest) {
+      if (existingConnectionRequest) {
         return res
           .status(400)
           .json({ message: "Connection request already sent" });
       }
 
-      if (connectionRequest.fromUserId.equals(connectionRequest.toUserId)) {
-        return res
-          .status(400)
-          .json({ message: "Cannot send connection request to yourself" });
-      }
+      // if (connectionRequest.fromUserId.equals(connectionRequest.toUserId)) {
+      //   return res
+      //     .status(400)
+      //     .json({ message: "Cannot send connection request to yourself" });
+      // }
 
       const newConnectionRequest = new connectionRequest({
         fromUserId,
@@ -52,7 +52,7 @@ requestRouter.post(
       const data = await newConnectionRequest.save();
 
       const statusMessage =
-        status === "interested" ? "is interested in" : "ignored";
+        status === "interested" ? " is interested in " : " ignored ";
 
       res.json({
         message: req.user.firstName + statusMessage + toUser.firstName,
