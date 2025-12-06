@@ -19,9 +19,14 @@ authRouter.post("/signup", async (req, res) => {
     // if (skills?.length > 10) {
     //   throw new Error("skill cannot be more than 10");
     // }
-    await user.save();
+    const savedUser = await user.save();
+    const token = await savedUser.getJwt();
+
+    res.cookie("token", token, {
+      expires: new Date(Date.now() + 8 * 3600000),
+    });
     // console.log(req.body);
-    res.send("User added successfully");
+    res.json({ message: "User Added successfully!", data: savedUser });
   } catch (err) {
     res.status(400).send("Error : " + err.message);
   }
