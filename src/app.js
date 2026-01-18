@@ -17,6 +17,13 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "DevTinder API is running 🚀",
+  });
+});
+
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
