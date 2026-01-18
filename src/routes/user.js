@@ -13,6 +13,27 @@ const USER_SAFE_DATA = [
   "about",
 ];
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: User feed, connections, and requests APIs
+ */
+
+/**
+ * @swagger
+ * /user/requests/received:
+ *   get:
+ *     summary: Get received connection requests
+ *     tags: [Users]
+ *     description: Fetch all incoming connection requests with status "interested" for the logged-in user.
+ *     responses:
+ *       200:
+ *         description: Connection requests fetched successfully
+ *       401:
+ *         description: Unauthorized
+ */
+
 userRouter.get("/user/requests/received", userAuth, async (req, res) => {
   try {
     const loggedinUser = req.user;
@@ -29,6 +50,20 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
     res.status(400).send("Error " + err.message);
   }
 });
+
+/**
+ * @swagger
+ * /user/connections:
+ *   get:
+ *     summary: Get user connections
+ *     tags: [Users]
+ *     description: Fetch all accepted connections for the logged-in user.
+ *     responses:
+ *       200:
+ *         description: Connections fetched successfully
+ *       401:
+ *         description: Unauthorized
+ */
 
 userRouter.get("/user/connections", userAuth, async (req, res) => {
   try {
@@ -54,6 +89,35 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
     res.status(400).send("Error " + err.message);
   }
 });
+
+/**
+ * @swagger
+ * /feed:
+ *   get:
+ *     summary: Get user feed
+ *     tags: [Users]
+ *     description: Fetch a paginated feed of users excluding existing connections and requests.
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 10
+ *         description: Number of users per page (maximum 50)
+ *     responses:
+ *       200:
+ *         description: User feed fetched successfully
+ *       401:
+ *         description: Unauthorized
+ */
 
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {

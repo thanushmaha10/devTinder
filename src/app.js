@@ -7,6 +7,8 @@ const requestRouter = require("./routes/request");
 const userRouter = require("./routes/user");
 const cors = require("cors");
 require("dotenv").config();
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
 
 app.use(
   cors({
@@ -17,11 +19,10 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.get("/", (req, res) => {
-  res.status(200).json({
-    status: "OK",
-    message: "DevTinder API is running 🚀",
-  });
+  res.redirect("/docs");
 });
 
 app.use("/", authRouter);

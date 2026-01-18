@@ -5,6 +5,45 @@ const User = require("../models/user");
 const ConnectionRequest = require("../models/connectionRequest");
 const mongoose = require("mongoose");
 
+/**
+ * @swagger
+ * tags:
+ *   name: Requests
+ *   description: Connection request management APIs
+ */
+
+/**
+ * @swagger
+ * /request/send/{status}/{userId}:
+ *   post:
+ *     summary: Send a connection request
+ *     tags: [Requests]
+ *     description: Send a connection request to another user with status interested or ignored.
+ *     parameters:
+ *       - in: path
+ *         name: status
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [interested, ignored]
+ *         description: Status of the connection request
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Target user ID
+ *     responses:
+ *       200:
+ *         description: Connection request sent successfully
+ *       400:
+ *         description: Invalid request or request already exists
+ *       404:
+ *         description: User not found
+ *       401:
+ *         description: Unauthorized
+ */
+
 requestRouter.post(
   "/request/send/:status/:userId",
   userAuth,
@@ -66,8 +105,40 @@ requestRouter.post(
     } catch (err) {
       res.status(400).send("Error : " + err.message);
     }
-  }
+  },
 );
+
+/**
+ * @swagger
+ * /request/review/{status}/{requestId}:
+ *   post:
+ *     summary: Review a connection request
+ *     tags: [Requests]
+ *     description: Accept or reject a received connection request.
+ *     parameters:
+ *       - in: path
+ *         name: status
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [accepted, rejected]
+ *         description: Review status
+ *       - in: path
+ *         name: requestId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Connection request ID
+ *     responses:
+ *       200:
+ *         description: Connection request reviewed successfully
+ *       400:
+ *         description: Invalid status or request
+ *       404:
+ *         description: Connection request not found
+ *       401:
+ *         description: Unauthorized
+ */
 
 requestRouter.post(
   "/request/review/:status/:requestId",
@@ -103,7 +174,7 @@ requestRouter.post(
     } catch (err) {
       res.status(400).send("Error " + err.message);
     }
-  }
+  },
 );
 
 module.exports = requestRouter;
