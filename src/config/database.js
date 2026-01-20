@@ -7,7 +7,6 @@ const connectDb = async () => {
 
   await mongoose.connect(process.env.DB_CONNECTION_SECRET);
   isConnected = true;
-  console.log("MongoDB connected");
 };
 
 module.exports = connectDb;
