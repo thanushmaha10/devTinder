@@ -9,6 +9,20 @@ const cors = require("cors");
 require("dotenv").config();
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
+const connectDb = require("./config/database");
+
+connectDb()
+  .then(() => {
+    console.log("Database connected successfully");
+    app.listen(process.env.PORT, () => {
+      console.log(
+        "Server started successfully listening on port " + process.env.PORT,
+      );
+    });
+  })
+  .catch((err) => {
+    console.error("Database not connected");
+  });
 
 app.use(
   cors({
@@ -31,16 +45,3 @@ app.use("/", requestRouter);
 app.use("/", userRouter);
 
 module.exports = app;
-
-// connectDb()
-//   .then(() => {
-//     console.log("Database connected successfully");
-//     app.listen(process.env.PORT, () => {
-//       console.log(
-//         "Server started successfully listening on port " + process.env.PORT
-//       );
-//     });
-//   })
-//   .catch((err) => {
-//     console.error("Database not connected");
-//   });
