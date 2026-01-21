@@ -10,12 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:7777",
-        description: "Local server",
-      },
-      {
-        url: "https://dev-tinder-seven-beta.vercel.app",
-        description: "Production server",
+        url: "https://dev-tinder.shapy.in",
       },
     ],
     components: {

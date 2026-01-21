@@ -11,25 +11,30 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
 const connectDb = require("./config/database");
 
-connectDb()
-  .then(() => {
-    console.log("Database connected successfully");
-    app.listen(process.env.PORT, () => {
-      console.log(
-        "Server started successfully listening on port " + process.env.PORT,
-      );
-    });
-  })
-  .catch((err) => {
-    console.error("Database not connected");
-  });
+// connectDb()
+//   .then(() => {
+//     console.log("Database connected successfully");
+//     app.listen(process.env.PORT, () => {
+//       console.log(
+//         "Server started successfully listening on port " + process.env.PORT,
+//       );
+//     });
+//   })
+//   .catch((err) => {
+//     console.error("Database not connected");
+//   });
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:7777",
+      "https://dev-tinder.shapy.in",
+    ],
     credentials: true,
   }),
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
