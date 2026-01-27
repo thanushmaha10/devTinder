@@ -57,6 +57,14 @@ This project focuses on backend architecture, authentication, and clean API desi
 
 ---
 
+## 📸 Screenshots
+
+### Swagger API Documentation
+<img width="1095" height="850" alt="image" src="https://github.com/user-attachments/assets/eb6b971a-5ec9-438b-b7bf-de4bb371f171" />
+
+
+---
+
 ## 🧠 Application Architecture
 
 The application follows a layered architecture:
