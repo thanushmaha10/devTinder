@@ -9,7 +9,7 @@ This project focuses on backend architecture, authentication, and clean API desi
 
 ## 🔗 Useful Links
 
-- GitHub Repository: https://github.com/thanushmaha10/devtinder-api
+- GitHub Repository: https://github.com/thanushmaha10/devTinder
 - Live API : [https://your-deployment-url.com](https://devtinder.shapy.in/docs/)
 
 ## 🚀 Features
