@@ -126,7 +126,6 @@ Through this project, the following backend concepts were practiced:
 ## 👨‍💻 Author
 
 **Thanush Maha**  
-JavaScript Full Stack Developer  
 
 GitHub: https://github.com/thanushmaha10  
 LinkedIn: https://www.linkedin.com/thanushm10
