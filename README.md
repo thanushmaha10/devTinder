@@ -7,15 +7,19 @@ This project focuses on backend architecture, authentication, and clean API desi
 
 ---
 
+## 🔗 Useful Links
+
+- GitHub Repository: https://github.com/thanushmaha10/devtinder-api
+- Live API : [https://your-deployment-url.com](https://devtinder.shapy.in/docs/)
+
 ## 🚀 Features
 
 - User authentication and authorization using JWT
 - Secure login and registration
-- Developer profile creation and update
+- Profile creation and update
 - Send, accept, and reject connection requests
 - RESTful API design
 - Middleware-based request handling
-- MVC folder structure
 - API documentation using Swagger
 
 ---
@@ -29,3 +33,98 @@ This project focuses on backend architecture, authentication, and clean API desi
 - **Mongoose**
 - **JWT (JSON Web Token)**
 - **Swagger (OpenAPI)**
+
+---
+
+## 📁 Project Structure
+
+├── src/
+│ ├── config/ # Database configuration
+│ ├── middleware/ # Authentication middleware
+│ ├── models/ # Mongoose schemas
+│ ├── routes/ # API routes
+│ ├── utils/ # validation utilities
+│ ├── app.js # Express app configuration
+│ └── swagger.js # Swagger API documentation setup
+│
+├── .dockerignore
+├── .gitignore
+├── dockerfile
+├── package.json
+├── package-lock.json
+├── server.js
+└── README.md
+
+---
+
+## 🧠 Application Architecture
+
+The application follows a layered architecture:
+
+- **Routes** handle HTTP requests and define API endpoints  
+- **Models** manage database schemas and data logic  
+- **Middleware** controls authentication
+- **Utils** contains reusable helper and validation functions  
+- **Config** stores environment-specific configuration  
+
+This separation improves scalability and maintainability.
+
+---
+
+## 🔐 Validation & Security
+
+The application includes utility-based validation to:
+- Validate signup data
+- Control which profile fields can be edited
+- Restrict password updates to password-only requests
+
+JWT is used for authentication, and sensitive data is managed using environment variables.
+
+---
+
+## 📖 API Documentation
+
+Swagger is integrated to provide interactive API documentation.
+
+Once the server is running, Swagger UI is available at:
+/api/docs
+
+This allows developers to explore and test the APIs easily.
+
+---
+
+## 🚀 Deployment
+
+The project is deployment-ready and includes:
+- Docker configuration for containerized deployment
+
+Environment variables must be configured on the deployment platform.
+
+---
+
+## 🎯 Learning Outcomes
+
+Through this project, the following backend concepts were practiced:
+- REST API design
+- Express application structuring
+- Middleware usage
+- Request validation
+- MongoDB schema modeling
+- API documentation with Swagger
+- Production-ready project setup
+
+---
+
+## 👨‍💻 Author
+
+**Thanush Maha**  
+JavaScript Full Stack Developer  
+
+GitHub: https://github.com/thanushmaha10  
+LinkedIn: https://www.linkedin.com/thanushm10
+
+---
+
+## 📄 License
+
+This project is created for learning and demonstration purposes.
