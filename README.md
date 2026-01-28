@@ -36,27 +36,6 @@ This project focuses on backend architecture, authentication, and clean API desi
 
 ---
 
-## 📁 Project Structure
-
-├── src/
-│ ├── config/ # Database configuration
-│ ├── middleware/ # Authentication middleware
-│ ├── models/ # Mongoose schemas
-│ ├── routes/ # API routes
-│ ├── utils/ # validation utilities
-│ ├── app.js # Express app configuration
-│ └── swagger.js # Swagger API documentation setup
-│
-├── .dockerignore
-├── .gitignore
-├── dockerfile
-├── package.json
-├── package-lock.json
-├── server.js
-└── README.md
-
----
-
 ## 📸 Screenshots
 
 ### Swagger API Documentation
