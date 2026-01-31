@@ -7,12 +7,11 @@ This project focuses on backend architecture, authentication, and clean API desi
 
 ---
 
-## 🔗 Useful Links
+## Useful Links
 
-- GitHub Repository: https://github.com/thanushmaha10/devTinder
 - Live API : [https://devtinder.shapy.in](https://devtinder.shapy.in/docs/)
 
-## 🚀 Features
+## Features
 
 - User authentication and authorization using JWT
 - Secure login and registration
@@ -24,7 +23,7 @@ This project focuses on backend architecture, authentication, and clean API desi
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **JavaScript**
 - **Node.js**
@@ -36,7 +35,7 @@ This project focuses on backend architecture, authentication, and clean API desi
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### Swagger API Documentation
 <img width="1095" height="850" alt="image" src="https://github.com/user-attachments/assets/eb6b971a-5ec9-438b-b7bf-de4bb371f171" />
@@ -44,7 +43,7 @@ This project focuses on backend architecture, authentication, and clean API desi
 
 ---
 
-## 🧠 Application Architecture
+## Application Architecture
 
 The application follows a layered architecture:
 
@@ -58,7 +57,7 @@ This separation improves scalability and maintainability.
 
 ---
 
-## 🔐 Validation & Security
+## Validation & Security
 
 The application includes utility-based validation to:
 - Validate signup data
@@ -69,7 +68,7 @@ JWT is used for authentication, and sensitive data is managed using environment 
 
 ---
 
-## 📖 API Documentation
+## API Documentation
 
 Swagger is integrated to provide interactive API documentation.
 
@@ -80,7 +79,7 @@ This allows developers to explore and test the APIs easily.
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 The project is deployment-ready and includes:
 - Docker configuration for containerized deployment
@@ -89,7 +88,7 @@ Environment variables must be configured on the deployment platform.
 
 ---
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 Through this project, the following backend concepts were practiced:
 - REST API design
@@ -102,7 +101,7 @@ Through this project, the following backend concepts were practiced:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Thanush Maha**  
 
